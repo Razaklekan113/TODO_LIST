@@ -5,17 +5,28 @@
 </div>
 
 <div class="card-body">
-    <form method="POST">
+    <form method="post">
         {% csrf_token %}
-        <label>{{form.username.label}}</label>
-        {{form.username}}
-
-        <label>{{form.password1.label}}</label>
-        {{form.password1}}
-
-        <label>{{form.password2.label}}</label>
-        {{form.password2}}
-        <input style="margin-top:10px ;" class="button" type="submit" value="Register">
+        
+        <label for="{{ form.username.id_for_label }}">Username:</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <p style="color: red;">{{ form.username.errors.0 }}</p>
+        {% endif %}
+    
+        <label for="{{ form.password1.id_for_label }}">Password:</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <p style="color: red;">{{ form.password1.errors.0 }}</p>
+        {% endif %}
+        
+        <label for="{{ form.password2.id_for_label }}">Password confirmation:</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <p style="color: red;">{{ form.password2.errors.0 }}</p>
+        {% endif %}
+        
+        <input style="margin-top:10px;" class="button" type="submit" value="Register">
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
 </div>
